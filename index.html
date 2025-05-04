@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products</title>
+    <link href="/src/output.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body class="bg-gray-100 min-h-screen flex">
+    <!-- sidebar -->
+    <aside class="w-64 bg-white shadow-md md:h-screen p-6 hidden md:block">
+      <h2 class="text-2xl font-bold text-blue-600 mb-6">Simple Store</h2>
+      <nav>
+        <ul class="space-y-4">
+          <li>
+            <a href="#" class="text-gray-700 hover:text-blue-500">Dashboard</a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-700 hover:text-blue-500">Products</a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-700 hover:text-blue-500">Orders</a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-700 hover:text-blue-500">Logout</a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Mobile header
+    <header
+      class="md:hidden bg-white shadow-md w-full p-4 flex justify-between items-center"
+    >
+      <h1 class="text-lg font-bold text-blue-600">Simple Store</h1>
+      <button class="text-gray-600 text-xl">
+        <i class="fas fa-bars"></i>
+      </button>
+    </header> -->
+
+    <!-- main -->
+    <main class="w-full flex-1 p-6">
+      <!-- Page header -->
+      <div
+        class="flex flex-col sm:flex-row sm:justify-center sm:items-center md:justify-between items-center mb-4"
+      >
+        <h1 class="text-2xl font-semibold text-gray-700 mb-2 sm:mb-0">
+          Daftar Produk
+        </h1>
+        <button
+          class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+          onclick="showFormAdd()"
+        >
+          <i class="fa-solid fa-plus mr-2"></i>Tambah Produk
+        </button>
+      </div>
+
+      <!-- table -->
+      <div class="bg-white space-y-4 rounded-lg shadow overflow-hidden">
+        <div class="overflow-x-auto">
+          <table
+            class="min-w-full bg-white border border-gray-200 shadow-md rounded-lg"
+          >
+            <tr class="bg-blue-200 text-gray-800">
+              <th class="px-6 py-3 text-center font-medium">id</th>
+              <th class="px-6 py-3 text-center font-medium">nama produk</th>
+              <th class="px-6 py-3 text-center font-medium">harga</th>
+              <th class="px-6 py-3 text-center font-medium">stok</th>
+              <th class="px-6 py-3 text-center font-medium">kategori</th>
+              <th class="px-6 py-3 text-center font-medium">aksi</th>
+            </tr>
+            <tbody id="product-list"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <!-- pop-up form update data -->
+    <div
+      id="edit-data"
+      class="fixed inset-0 items-center justify-center hidden"
+    >
+      <div class="bg-white p-6 rounded-lg w-[80%] max-w-md shadow-lg">
+        <h2 class="text-xl text-center text-slate-800 font-semibold mb-4">
+          Edit Produk
+        </h2>
+        <form action="" method="pots" id="edit-form">
+          <div class="mb-2">
+            <label for="nama_produk">Nama Produk:</label>
+            <input
+              type="text"
+              name="nama"
+              id="nama_produk"
+              class="w-full p-2 rounded border focus:outline-0 focus:border-blue-500"
+              autocomplete="off"
+            />
+          </div>
+          <div class="mb-2">
+            <label for="harga_produk">Harga Produk:</label>
+            <input
+              type="number"
+              name="harga"
+              id="harga_produk"
+              class="w-full p-2 rounded border focus:outline-0 focus:border-blue-500"
+              autocomplete="off"
+            />
+          </div>
+          <div class="mb-2">
+            <label for="stok_produk">Stok:</label>
+            <input
+              type="number"
+              name="stok"
+              id="stok_produk"
+              class="w-full p-2 rounded border focus:outline-0 focus:border-blue-500"
+              autocomplete="off"
+            />
+          </div>
+          <div class="mb-2">
+            <label for="kategori_produk">kategori:</label>
+            <input
+              type="text"
+              name="kategori"
+              id="kategori_produk"
+              class="w-full p-2 rounded border focus:outline-0 focus:border-blue-500"
+              autocomplete="off"
+            />
+          </div>
+
+          <!-- button -->
+          <div class="flex justify-end gap-2 mt-4">
+            <button
+              type="button"
+              id="close-btn"
+              class="px-4 py-2 bg-gray-400 hover:bg-gray-600 text-white rounded"
+            >
+              Batal
+            </button>
+            <button
+              id="btn-submit"
+              type="button"
+              class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
+            >
+              Simpan
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- pop up form add data -->
+    <!-- pop-up form tambah produk -->
+    <div
+      id="add-data"
+      class="fixed inset-0 items-center justify-center hidden z-50"
+    >
+      <div class="bg-white p-6 rounded-lg w-[80%] max-w-md shadow-lg">
+        <h2 class="text-xl text-center text-slate-800 font-semibold mb-4">
+          Tambah Produk
+        </h2>
+        <form id="add-form" method="post">
+          <div class="mb-2">
+            <label for="add-nama" class="block">Nama Produk:</label>
+            <input
+              type="text"
+              id="add-nama"
+              class="w-full p-2 rounded border focus:outline-0 focus:border-blue-500"
+              required
+            />
+          </div>
+          <div class="mb-2">
+            <label for="add-harga" class="block">Harga Produk:</label>
+            <input
+              type="number"
+              id="add-harga"
+              class="w-full p-2 rounded border focus:outline-0 focus:border-blue-500"
+              required
+            />
+          </div>
+          <div class="mb-2">
+            <label for="add-stok" class="block">Stok:</label>
+            <input
+              type="number"
+              id="add-stok"
+              class="w-full p-2 rounded border focus:outline-0 focus:border-blue-500"
+              required
+            />
+          </div>
+          <div class="mb-2">
+            <label for="add-kategori" class="block">Kategori:</label>
+            <input
+              type="text"
+              id="add-kategori"
+              class="w-full p-2 rounded border focus:outline-0 focus:border-blue-500"
+              required
+            />
+          </div>
+
+          <!-- button -->
+          <div class="flex justify-end gap-2 mt-4">
+            <button
+              type="button"
+              id="close-add-btn"
+              class="px-4 py-2 bg-gray-400 hover:bg-gray-600 text-white rounded"
+            >
+              Batal
+            </button>
+            <button
+              id="btn-submit"
+              type="submit"
+              class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
+            >
+              Tambah
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="script/products.js"></script>
+  </body>
+</html>

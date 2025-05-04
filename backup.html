@@ -1,0 +1,77 @@
+<div class="w-1/2 min-h-screen flex justify-center items-center flex-col">
+  <div class="w-[300px] h-[400px] p-2 rounded-sm bg-blue-500">
+    <h1 class="text-3xl font-bold text-center text-white mb-6">Register</h1>
+    <form action="" id="register" method="post" class="mt-8 p-4 h-[100px]">
+      <div class="flex flex-col relative mb-4">
+        <input
+          class="py-2 pl-8 rounded-sm focus:outline-0 bg-white focus:border-white"
+          type="text"
+          id="nama_lengkap"
+          name="nama_lengkap"
+          placeholder="nama lengkap"
+          required
+          autocomplete="off"
+        />
+        <i
+          class="fa-solid fa-user absolute left-2 top-3 text-lg text-slate-500"
+        ></i>
+      </div>
+      <div class="flex flex-col relative mb-4">
+        <input
+          class="py-2 pl-8 rounded-sm focus:outline-0 bg-white focus:border-white"
+          type="text"
+          id="username"
+          name="username"
+          placeholder="username"
+          required
+          autocomplete="off"
+        />
+        <i
+          class="fa-solid fa-user absolute left-2 top-3 text-lg text-slate-500"
+        ></i>
+      </div>
+      <div class="flex flex-col relative mb-4">
+        <input
+          class="py-2 pl-8 rounded-sm focus:outline-0 bg-white focus:border-white"
+          type="password"
+          id="password"
+          name="password"
+          placeholder="password"
+          required
+        />
+        <i
+          class="fa-solid fa-lock absolute left-2 top-3 text-lg text-slate-500"
+        ></i>
+      </div>
+      <div class="flex flex-col relative mb-2">
+        <input
+          class="py-2 pl-8 rounded-sm focus:outline-0 bg-white focus:border-white"
+          type="password"
+          id="confirm_password"
+          name="confirm_password"
+          placeholder="confirm password"
+          required
+        />
+        <i
+          class="fa-solid fa-lock absolute left-2 top-3 text-lg text-slate-500"
+        ></i>
+      </div>
+      <p class="text-white">
+        sudah memiliki akun?
+        <a
+          href="login.html"
+          class="text-black pl-1 hover:text-slate-200 hover:underline"
+          >Login</a
+        >
+      </p>
+      <div class="text-center mt-2">
+        <button
+          type="submit"
+          class="w-full border border-white text-white hover:bg-white hover:text-blue-500 font-semibold py-2 px-4 rounded"
+        >
+          Register
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

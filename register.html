@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link href="/src/output.css" rel="stylesheet" />
+  </head>
+  <body class="bg-gray-100">
+    <div
+      class="min-h-screen flex flex-col lg:flex-row items-center justify-center px-4 py-8"
+    >
+      <h1 class="text-3xl font-bold text-center mb-6 lg:absolute top-6">
+        Welcome to <span class="text-blue-500">my Website</span>
+      </h1>
+
+      <div class="lg:w-1/2 mb-8 lg:mb-0">
+        <img
+          src="images/register.jpg"
+          alt="Register"
+          class="w-full max-w-md mx-auto rounded-lg shadow-lg"
+        />
+      </div>
+
+      <div class="lg:w-1/2 flex justify-center">
+        <div class="w-full max-w-md bg-white shadow-xl rounded-xl p-6">
+          <h2 class="text-2xl font-bold text-center text-blue-500 mb-6">
+            Register
+          </h2>
+
+          <form id="register" method="post" class="space-y-4">
+            <div class="relative">
+              <input
+                class="w-full py-2 pl-10 pr-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                type="text"
+                id="nama_lengkap"
+                name="nama_lengkap"
+                placeholder="Nama Lengkap"
+                required
+                autocomplete="off"
+              />
+              <i
+                class="fa-solid fa-user absolute left-3 top-2.5 text-gray-400"
+              ></i>
+            </div>
+
+            <div class="relative">
+              <input
+                class="w-full py-2 pl-10 pr-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Username"
+                required
+                autocomplete="off"
+              />
+              <i
+                class="fa-solid fa-user absolute left-3 top-2.5 text-gray-400"
+              ></i>
+            </div>
+
+            <div class="relative">
+              <input
+                class="w-full py-2 pl-10 pr-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                required
+              />
+              <i
+                class="fa-solid fa-lock absolute left-3 top-2.5 text-gray-400"
+              ></i>
+            </div>
+
+            <div class="relative">
+              <input
+                class="w-full py-2 pl-10 pr-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                type="password"
+                id="confirm_password"
+                name="confirm_password"
+                placeholder="Confirm Password"
+                required
+              />
+              <i
+                class="fa-solid fa-lock absolute left-3 top-2.5 text-gray-400"
+              ></i>
+            </div>
+
+            <p class="text-sm text-center text-gray-600">
+              Sudah memiliki akun?
+              <a href="login.html" class="text-blue-500 hover:underline"
+                >Login</a
+              >
+            </p>
+
+            <button
+              type="submit"
+              class="w-full bg-blue-500 text-white py-2 rounded-lg font-semibold hover:bg-blue-600 transition duration-300"
+            >
+              Register
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="script/register.js"></script>
+  </body>
+</html>
