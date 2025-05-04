@@ -23,13 +23,13 @@ form.addEventListener("submit", async function (e) {
     console.log(data);
 
     if (request.ok) {
-      alert("Login berhasil");
+      alert(`${data.message}`);
 
       localStorage.setItem(`access-token`, `${data.data.accessToken}`);
 
       window.location.href = "/index.html";
     } else {
-      alert("Login gagal!");
+      alert(`${data.message}`);
       username.value = "";
       password.value = "";
     }

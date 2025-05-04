@@ -227,4 +227,10 @@ const createData = async () => {
   }
 };
 
+const logOut = () => {
+  localStorage.removeItem("access-token");
+
+  window.location.href = "/login.html";
+};
+
 fetchProducts(accessToken);
