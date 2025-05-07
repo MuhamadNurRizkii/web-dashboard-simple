@@ -23,13 +23,23 @@ form.addEventListener("submit", async function (e) {
     console.log(data);
 
     if (request.ok) {
-      alert(`${data.message}`);
+      // alert(`${data.message}`);
+      await Swal.fire({
+        title: "Good job!",
+        text: data.message,
+        icon: "success",
+      });
 
       localStorage.setItem(`access-token`, `${data.data.accessToken}`);
 
       window.location.href = "/index.html";
     } else {
-      alert(`${data.message}`);
+      // alert(`${data.message}`);
+      await Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: data.message,
+      });
       username.value = "";
       password.value = "";
     }

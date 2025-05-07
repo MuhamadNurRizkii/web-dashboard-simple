@@ -14,78 +14,89 @@
     />
   </head>
   <body class="bg-gray-100 min-h-screen flex">
-    <!-- sidebar -->
-    <aside class="w-64 bg-white shadow-md md:h-screen p-6 hidden md:block">
-      <h2 class="text-2xl font-bold text-blue-600 mb-6">Simple Store</h2>
-      <nav>
-        <ul class="space-y-4">
-          <li>
-            <a href="#" class="text-gray-700 hover:text-blue-500">Dashboard</a>
-          </li>
-          <li>
-            <a href="#" class="text-gray-700 hover:text-blue-500">Products</a>
-          </li>
-          <li>
-            <a href="#" class="text-gray-700 hover:text-blue-500">Orders</a>
-          </li>
-          <li>
-            <a
-              href="#"
-              class="text-gray-700 hover:text-blue-500"
-              onclick="logOut()"
-              >Logout</a
-            >
-          </li>
-        </ul>
-      </nav>
-    </aside>
-
-    <!-- Mobile header
-    <header
-      class="md:hidden bg-white shadow-md w-full p-4 flex justify-between items-center"
+    <!-- wrapper -->
+    <div
+      class="flex flex-col overflow-x-hidden w-full md:flex-row min-h-screen"
     >
-      <h1 class="text-lg font-bold text-blue-600">Simple Store</h1>
-      <button class="text-gray-600 text-xl">
-        <i class="fas fa-bars"></i>
-      </button>
-    </header> -->
+      <!-- sidebar -->
+      <aside class="w-64 bg-white shadow-md md:h-screen p-6 hidden md:block">
+        <h2 class="text-2xl font-bold text-blue-600 mb-6">Simple Store</h2>
+        <nav>
+          <ul class="space-y-4">
+            <li>
+              <a href="#" class="text-gray-700 hover:text-blue-500"
+                >Dashboard</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-gray-700 hover:text-blue-500">Products</a>
+            </li>
+            <li>
+              <a href="#" class="text-gray-700 hover:text-blue-500">Orders</a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="text-gray-700 hover:text-blue-500"
+                onclick="logOut()"
+                >Logout</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </aside>
 
-    <!-- main -->
-    <main class="w-full flex-1 p-6">
-      <!-- Page header -->
-      <div
-        class="flex flex-col sm:flex-row sm:justify-center sm:items-center md:justify-between items-center mb-4"
+      <!-- Mobile header -->
+      <header
+        class="md:hidden bg-white shadow-md w-full p-4 flex justify-between items-center"
       >
-        <h1 class="text-2xl font-semibold text-gray-700 mb-2 sm:mb-0">
-          Daftar Produk
-        </h1>
+        <h1 class="text-lg font-bold text-blue-600">Simple Store</h1>
         <button
-          class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-          onclick="showFormAdd()"
+          id="btn-out"
+          class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
         >
-          <i class="fa-solid fa-plus mr-2"></i>Tambah Produk
+          <!-- <i class="fas fa-bars"></i> -->
+          <i class="fa-solid fa-arrow-left"></i> logout
         </button>
-      </div>
+      </header>
 
-      <!-- table -->
-      <div class="bg-white space-y-4 rounded-lg shadow overflow-hidden">
-        <div class="overflow-x-auto">
-          <table
-            class="min-w-full bg-white border border-gray-200 shadow-md rounded-lg"
+      <!-- main -->
+      <main class="w-full flex-1 p-6">
+        <!-- Page header -->
+        <div
+          class="flex flex-col sm:flex-row sm:justify-center sm:items-center md:justify-between items-center mb-4"
+        >
+          <h1 class="text-2xl font-semibold text-gray-700 mb-2 sm:mb-0">
+            Daftar Produk
+          </h1>
+          <button
+            class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+            onclick="showFormAdd()"
           >
-            <tr class="bg-blue-200 text-gray-800">
-              <th class="px-6 py-3 text-center font-medium">id</th>
-              <th class="px-6 py-3 text-center font-medium">nama produk</th>
-              <th class="px-6 py-3 text-center font-medium">harga</th>
-              <th class="px-6 py-3 text-center font-medium">stok</th>
-              <th class="px-6 py-3 text-center font-medium">kategori</th>
-              <th class="px-6 py-3 text-center font-medium">aksi</th>
-            </tr>
-            <tbody id="product-list"></tbody>
-          </table>
+            <i class="fa-solid fa-plus mr-2"></i>Tambah Produk
+          </button>
         </div>
-      </div>
-    </main>
+
+        <!-- table -->
+        <div class="bg-white space-y-4 rounded-lg shadow overflow-hidden">
+          <div class="overflow-x-auto">
+            <table
+              class="min-w-full bg-white border border-gray-200 shadow-md rounded-lg"
+            >
+              <tr class="bg-blue-200 text-gray-800">
+                <th class="px-6 py-3 text-center font-medium">id</th>
+                <th class="px-6 py-3 text-center font-medium">nama produk</th>
+                <th class="px-6 py-3 text-center font-medium">harga</th>
+                <th class="px-6 py-3 text-center font-medium">stok</th>
+                <th class="px-6 py-3 text-center font-medium">kategori</th>
+                <th class="px-6 py-3 text-center font-medium">aksi</th>
+              </tr>
+              <tbody id="product-list"></tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
 
     <!-- pop-up form update data -->
     <div
@@ -177,6 +188,7 @@
               id="add-nama"
               class="w-full p-2 rounded border focus:outline-0 focus:border-blue-500"
               required
+              autocomplete="off"
             />
           </div>
           <div class="mb-2">
@@ -186,6 +198,7 @@
               id="add-harga"
               class="w-full p-2 rounded border focus:outline-0 focus:border-blue-500"
               required
+              autocomplete="off"
             />
           </div>
           <div class="mb-2">
@@ -195,6 +208,7 @@
               id="add-stok"
               class="w-full p-2 rounded border focus:outline-0 focus:border-blue-500"
               required
+              autocomplete="off"
             />
           </div>
           <div class="mb-2">
@@ -204,6 +218,7 @@
               id="add-kategori"
               class="w-full p-2 rounded border focus:outline-0 focus:border-blue-500"
               required
+              autocomplete="off"
             />
           </div>
 
@@ -217,7 +232,7 @@
               Batal
             </button>
             <button
-              id="btn-submit"
+              id="btn-submitt"
               type="submit"
               class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
             >
@@ -228,6 +243,10 @@
       </div>
     </div>
 
+    <!-- sweetalert2  -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="script/products.js"></script>
+    <script src="script/navbar.js"></script>
   </body>
 </html>

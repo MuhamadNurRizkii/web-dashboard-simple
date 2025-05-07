@@ -101,6 +101,7 @@ const editData = async (id) => {
     const kategoriProduk = document.getElementById("kategori_produk");
     const btnClose = document.getElementById("close-btn");
     const btnSubmit = document.getElementById("btn-submit");
+    const editForm = document.getElementById("btn-submit");
 
     namaProduk.value = dataId.nama;
     hargaProduk.value = dataId.harga;
@@ -125,8 +126,15 @@ const editData = async (id) => {
         }
       );
 
+      const { message } = await request.json();
+
       if (request.ok) {
-        alert("update data berhasil");
+        // alert("update data berhasil");
+        await Swal.fire({
+          title: "Success!",
+          text: message,
+          icon: "success",
+        });
         editData.classList.remove("flex");
         editData.classList.add("hidden");
         fetchProducts(accessToken);
@@ -143,32 +151,35 @@ const editData = async (id) => {
 };
 
 const deleteData = async (id) => {
-  const konfirmasi = confirm("Yakin ingin menghapus produk ini??");
-  if (!konfirmasi) {
-    return;
-  }
-  try {
-    const response = await fetch(
-      `https://simple-store-api.vercel.app/products/${id}`,
-      {
+  await Swal.fire({
+    title: "Are you sure?",
+    text: "Yakin ingin menghapus?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      fetch(`https://simple-store-api.vercel.app/products/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${accessToken}`,
           "Content-Type": "application/json",
         },
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error(`Gagal menghapus data. Status: ${response.status}`);
+      })
+        .then((response) => response.json())
+        .then((data) => ({ message: data.message }))
+        .then(({ message }) => {
+          Swal.fire({
+            title: "Deleted!",
+            text: message,
+            icon: "success",
+          });
+          fetchProducts(accessToken);
+        });
     }
-
-    const { message } = await response.json();
-    alert(`${message}`);
-    fetchProducts(accessToken);
-  } catch (err) {
-    console.log("Error:", err);
-  }
+  });
 };
 
 const showFormAdd = async () => {
@@ -186,44 +197,63 @@ const showFormAdd = async () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    const submitButton = document.getElementById("btn-submitt");
+    submitButton.disabled = true;
+
     await createData();
     form.reset();
     addBtn.classList.remove("flex");
     addBtn.classList.add("hidden");
+
+    submitButton.disabled = false;
   });
 };
 
+let isProcessing = false;
+
 const createData = async () => {
+  if (isProcessing) return;
   try {
+    isProcessing = true;
     const addNama = document.getElementById("add-nama");
     const addHarga = document.getElementById("add-harga");
     const addStok = document.getElementById("add-stok");
     const addKategori = document.getElementById("add-kategori");
 
-    const request = await fetch(url, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        nama: addNama.value,
-        harga: addHarga.value,
-        stok: addStok.value,
-        kategori: addKategori.value,
-      }),
-    });
+    const request = await fetch(
+      "https://simple-store-api.vercel.app/products",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nama: addNama.value,
+          harga: addHarga.value,
+          stok: addStok.value,
+          kategori: addKategori.value,
+        }),
+      }
+    );
 
     if (!request.ok) {
       throw new Error(`Gagal menghapus data. Status: ${response.status}`);
     }
 
     const { message } = await request.json();
-    alert(`${message}`);
+    // alert(`${message}`);
+    await Swal.fire({
+      title: "Good job!",
+      text: message,
+      icon: "success",
+    });
 
     fetchProducts(accessToken);
   } catch (err) {
     console.log("Error:", err);
+  } finally {
+    isProcessing = false;
   }
 };
 
