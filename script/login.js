@@ -31,6 +31,7 @@ form.addEventListener("submit", async function (e) {
       });
 
       localStorage.setItem(`access-token`, `${data.data.accessToken}`);
+      localStorage.setItem("userId", `${data.data.id}`);
 
       window.location.href = "/index.html";
     } else {

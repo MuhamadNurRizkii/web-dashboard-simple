@@ -32,10 +32,18 @@ form.addEventListener("submit", async function (e) {
   console.log(data);
 
   if (!response.ok) {
-    alert(data.message);
+    await Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: data.message,
+    });
   }
 
   if (response.ok) {
-    alert(data.message);
+    await Swal.fire({
+      title: "Success!",
+      text: data.message,
+      icon: "success",
+    });
   }
 });

@@ -1,6 +1,7 @@
 const url = "https://simple-store-api.vercel.app/products";
 
 const accessToken = localStorage.getItem("access-token");
+const userId = localStorage.getItem("userId");
 
 const fetchProducts = async (accesToken) => {
   try {
@@ -259,8 +260,14 @@ const createData = async () => {
 
 const logOut = () => {
   localStorage.removeItem("access-token");
+  localStorage.removeItem("userId");
 
   window.location.href = "/login.html";
 };
+
+const idProfile = document.getElementById("id-profile");
+const profileId = document.getElementById("profile-id");
+idProfile.setAttribute("href", `profile.html?id=${userId}`);
+profileId.setAttribute("href", `profile.html?id=${userId}`);
 
 fetchProducts(accessToken);
