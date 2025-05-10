@@ -3,6 +3,10 @@ const url = "https://simple-store-api.vercel.app/products";
 const accessToken = localStorage.getItem("access-token");
 const userId = localStorage.getItem("userId");
 
+let currentPage = 1;
+const perPage = 5;
+let globalData = [];
+
 const fetchProducts = async (accesToken) => {
   try {
     const response = await fetch(url, {
@@ -24,6 +28,7 @@ const fetchProducts = async (accesToken) => {
 
     const { message, data } = await response.json();
     console.log(message);
+    globalData = data;
     console.log(data);
     data.forEach((item) => {
       console.log(item.nama);
@@ -35,29 +40,36 @@ const fetchProducts = async (accesToken) => {
   }
 };
 
-const renderData = (data) => {
+const renderData = () => {
   const list = document.getElementById("product-list");
-  const addProduk = document.getElementById("add-produk");
-  console.log(list);
+  const totalPages = Math.ceil(globalData.length / perPage);
+  const start = (currentPage - 1) * perPage;
+  const end = start + perPage;
+  const currentProducts = globalData.slice(start, end);
+  console.log(currentProducts);
 
   list.innerHTML = "";
 
-  if (!data || !Array.isArray(data)) {
+  if (
+    !currentProducts ||
+    !Array.isArray(currentProducts) ||
+    currentProducts.length === 0
+  ) {
     list.innerHTML =
       '<h1 class="text-xl italic text-red-500">Tidak ada product!</h1>';
   }
 
   //   list.innerHTML = data;
-  list.innerHTML = data
-    .map((item) => {
+  list.innerHTML = currentProducts
+    .map((item, index) => {
       return `
       <tr class="hover:bg-gray-50 transition">
-        <td class="px-6 py-4">${item._id}</td>
-        <td class="px-6 py-4">${item.nama}</td>
-        <td class="px-6 py-4">${item.harga}</td>
-        <td class="px-6 py-4">${item.stok}</td>
-        <td class="px-6 py-4">${item.kategori}</td>
-        <td class="px-6 py-4">
+        <td class="px-4 py-3 text-center">${start + index + 1}</td>
+        <td class="px-4 py-3 text-center">${item.nama}</td>
+        <td class="px-4 py-3 text-center">${item.harga}</td>
+        <td class="px-4 py-3 text-center">${item.stok}</td>
+        <td class="px-4 py-3 text-center">${item.kategori}</td>
+        <td class="px-4 py-3 text-center">
         <a class="edit"  onclick="editData('${item._id}')">
         <i class="fa-solid fa-pen-to-square text-lg text-blue-400"></i>
         </a> | 
@@ -68,6 +80,12 @@ const renderData = (data) => {
     `;
     })
     .join("");
+
+  document.getElementById(
+    "pageInfo"
+  ).textContent = `Halaman ${currentPage} dari ${totalPages}`;
+  document.getElementById("prevBtn").disabled = currentPage === 1;
+  document.getElementById("nextBtn").disabled = currentPage === totalPages;
 };
 
 const editData = async (id) => {
@@ -269,5 +287,20 @@ const idProfile = document.getElementById("id-profile");
 const profileId = document.getElementById("profile-id");
 idProfile.setAttribute("href", `profile.html?id=${userId}`);
 profileId.setAttribute("href", `profile.html?id=${userId}`);
+
+document.getElementById("prevBtn").addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    renderData();
+  }
+});
+
+document.getElementById("nextBtn").addEventListener("click", () => {
+  const totalPages = Math.ceil(globalData.length / perPage);
+  if (currentPage < totalPages) {
+    currentPage++;
+    renderData();
+  }
+});
 
 fetchProducts(accessToken);

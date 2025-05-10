@@ -98,7 +98,7 @@
               class="min-w-full bg-white border border-gray-200 shadow-md rounded-lg"
             >
               <tr class="bg-blue-200 text-gray-800">
-                <th class="px-6 py-3 text-center font-medium">id</th>
+                <th class="px-6 py-3 text-center font-medium">no</th>
                 <th class="px-6 py-3 text-center font-medium">nama produk</th>
                 <th class="px-6 py-3 text-center font-medium">harga</th>
                 <th class="px-6 py-3 text-center font-medium">stok</th>
@@ -108,6 +108,23 @@
               <tbody id="product-list"></tbody>
             </table>
           </div>
+        </div>
+
+        <!-- pagination controls -->
+        <div class="flex justify-between items-center mt-4">
+          <button
+            id="prevBtn"
+            class="bg-blue-500 text-white px-4 py-2 rounded disabled:opacity-50"
+          >
+            Prev
+          </button>
+          <span id="pageInfo" class="text-gray-700"></span>
+          <button
+            id="nextBtn"
+            class="bg-blue-500 text-white px-4 py-2 rounded disabled:opacity-50"
+          >
+            Next
+          </button>
         </div>
       </main>
     </div>
