@@ -46,4 +46,5 @@ form.addEventListener("submit", async function (e) {
       icon: "success",
     });
   }
+  window.location.href = "login.html";
 });
